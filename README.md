@@ -136,6 +136,8 @@ CREATE OR REPLACE FUNCTION update_employee(
     p_department_id INT
 )
 RETURNS VOID AS $$
+
+
 BEGIN
     UPDATE employees
     SET firstname = p_firstname,
@@ -165,8 +167,12 @@ $$ LANGUAGE plpgsql;
 //CALLING THIS FUNCTION
 SELECT delete_employee(2);
 
+
 To implement a CRUD operations with single stored procedure method for your given project.
 Implementing CRUD operations using a single stored procedure in PostgreSQL involves using conditional logic to determine the action to perform based on input parameters.
+
+
+
 //SINGLE STORE PROCEDURE CRUD
 CREATE OR REPLACE FUNCTION manage_employee(
     p_action VARCHAR(10),  -- 'create', 'read', 'update', 'delete'
@@ -182,6 +188,8 @@ CREATE OR REPLACE FUNCTION manage_employee(
     p_salary NUMERIC DEFAULT NULL,
     p_department_id INT DEFAULT NULL
 )
+
+
 RETURNS VOID AS $$
 BEGIN
     IF p_action = 'create' THEN
@@ -211,15 +219,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+
+
 //CALLING THE FUNCTIONS
 //CREATE
 CALL manage_employee('create', NULL, 'John', 'Doe', '1990-05-15', 'john.doe@example.com', '123 Main St', 'johndoe', 'password123', 'Male', 50000, 1);
 
+
+
 //READ
 SELECT * FROM manage_employee('read', 1);
 
+
+
 //UPDATE
 CALL manage_employee('update', 1, 'Jane', 'Smith', '1991-08-20', 'jane.smith@example.com', '456 Elm St', 'janesmith', NULL, 'Female', 60000, 2);
+
+
 
 //DELETE
 CALL manage_employee('delete', 2);
